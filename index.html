@@ -1,1 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ 物理超级学习利器</title>
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath:[['$$','$$']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:"PingFang SC","Microsoft YaHei",sans-serif; }
+body { background:#0f1424; color:#e8ecf5; min-height:100vh; }
+header { background:linear-gradient(90deg,#1a2347,#2b1a47); padding:14px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+header h1 { font-size:20px; }
+nav { display:flex; gap:6px; flex-wrap:wrap; padding:10px 16px; background:#141a30; position:sticky; top:0; z-index:10;}
+nav button { background:#222b4d; color:#cfd8f5; border:none; padding:9px 16px; border-radius:20px; cursor:pointer; font-size:14px;}
+nav button.active { background:linear-gradient(90deg,#4f6ef7,#9b59f7); color:#fff; }
+main { padding:16px; max-width:960px; margin:0 auto; }
+.page { display:none; } .page.show { display:block; }
+.card { background:#1a2138; border:1px solid #2b3760; border-radius:14px; padding:16px; margin-bottom:14px; }
+.card h2 { font-size:16px; color:#8fa6ff; margin-bottom:10px; }
+button.act { background:linear-gradient(90deg,#4f6ef7,#9b59f7); border:none; color:#fff; padding:10px 18px; border-radius:10px; cursor:pointer; font-size:14px; margin:4px 4px 4px 0;}
+button.sub { background:#2b3760; border:none; color:#cfd8f5; padding:8px 14px; border-radius:10px; cursor:pointer; font-size:13px; margin:4px 4px 4px 0;}
+button:disabled { opacity:.5; cursor:not-allowed; }
+select,input[type=text],input[type=password] { background:#10162b; color:#fff; border:1px solid #33406e; border-radius:8px; padding:9px; font-size:14px; }
+.out { background:#10162b; border-radius:10px; padding:14px; margin-top:10px; min-height:40px; line-height:1.85; font-size:15px; white-space:pre-wrap; word-break:break-word;}
+canvas.sim { background:#0a0e1c; border-radius:10px; width:100%; touch-action:none; }
+.row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:6px 0;}
+.row label { font-size:13px; color:#9fb0d8; }
+input[type=range] { accent-color:#6c84ff; }
+.chips { display:flex; gap:6px; flex-wrap:wrap; }
+.chips button { background:#243056; color:#cfe; border:none; padding:7px 12px; border-radius:16px; cursor:pointer; font-size:13px;}
+#video { width:100%; border-radius:10px; background:#000; }
+img.preview { max-width:100%; border-radius:10px; margin-top:8px; }
+.tag { font-size:12px; color:#7ee0a3; }
+.spin { display:inline-block; animation:r 1s linear infinite;} @keyframes r{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header><h1>⚡ 物理超级学习利器</h1><span class="tag" id="keyState">未配置 API Key</span></header>
+<nav>
+<button class="active" onclick="go('learn',this)">📖 知识讲解</button>
+<button onclick="go('lab',this)">🔬 互动实验室</button>
+<button onclick="go('quiz',this)">🎯 自动出题</button>
+<button onclick="go('photo',this)">📷 拍照/上传解题</button>
+<button onclick="go('set',this)">⚙️ 设置</button>
+</nav>
+<main>
 
+<!-- ===== 知识讲解 ===== -->
+<section id="learn" class="page show">
+<div class="card"><h2>选择知识点（AI 详细讲解 + 可语音朗读）</h2>
+<div class="chips" id="topics"></div>
+<div class="row"><input type="text" id="customTopic" placeholder="或输入任意物理问题…" style="flex:1">
+<button class="act" onclick="explain(qs('#customTopic').value)">讲解</button></div>
+<div class="row"><button class="sub" onclick="speak(lastText)">🔊 朗读</button><button class="sub" onclick="speechSynthesis.cancel()">⏹ 停止</button><button class="sub" onclick="listen('customTopic')">🎤 语音提问</button></div>
+<div class="out" id="learnOut">点击上方知识点，AI 老师将给出图文级详细讲解（含公式推导、生活实例、易错点）。</div>
+</div>
+</section>
+
+<!-- ===== 互动实验室 ===== -->
+<section id="lab" class="page">
+<div class="card"><h2>🚀 抛体运动（拖动滑块实时改变轨迹）</h2>
+<div class="row"><label>初速度 <span id="v0v">25</span> m/s</label><input type="range" id="v0" min="5" max="50" value="25" oninput="qs('#v0v').textContent=this.value">
+<label>角度 <span id="angv">45</span>°</label><input type="range" id="ang" min="10" max="80" value="45" oninput="qs('#angv').textContent=this.value">
+<button class="act" onclick="fire()">发射</button></div>
+<canvas id="c1" class="sim" width="900" height="320"></canvas>
+</div>
+<div class="card"><h2>🌊 波的干涉（双源，实时叠加）</h2>
+<div class="row"><label>频率 <span id="fv">2</span> Hz</label><input type="range" id="freq" min="1" max="5" value="2" oninput="qs('#fv').textContent=this.value">
+<button class="sub" id="waveBtn" onclick="toggleWave()">▶ 播放/暂停</button></div>
+<canvas id="c2" class="sim" width="900" height="300"></canvas>
+</div>
+<div class="card"><h2>🕰 单摆（点击画布拖动小球释放）</h2>
+<div class="row"><label>摆长 <span id="Lv">1.5</span> m</label><input type="range" id="Lp" min="0.5" max="3" step="0.1" value="1.5" oninput="qs('#Lv').textContent=this.value"></div>
+<canvas id="c3" class="sim" width="900" height="320"></canvas>
+</div>
+</section>
+
+<!-- ===== 自动出题 ===== -->
+<section id="quiz" class="page">
+<div class="card"><h2>AI 自动出题 → 作答 → 分步解析 → 变式训练</h2>
+<div class="row">
+<select id="qTopic"><option>运动学</option><option>牛顿定律</option><option>功和能</option><option>动量</option><option>圆周运动与万有引力</option><option>静电场</option><option>电路</option><option>磁场与电磁感应</option><option>机械振动与波</option><option>光学</option><option>热学</option><option>近代物理</option></select>
+<select id="qLevel"><option>基础</option><option selected>中等</option><option>难题</option><option>竞赛级</option></select>
+<button class="act" onclick="genQuiz()">📝 出一道题</button></div>
+<div class="out" id="quizOut">选择章节和难度，AI 会现场命题。</div>
+<div class="row"><button class="sub" id="showAns" style="display:none" onclick="quizAnswer()">💡 查看分步解答</button>
+<button class="sub" id="varyBtn" style="display:none" onclick="variation(lastQuestion)">🔁 变式训练</button>
+<button class="sub" onclick="speak(lastText)">🔊 朗读</button></div>
+<div class="out" id="ansOut" style="display:none"></div>
+</div>
+</section>
+
+<!-- ===== 拍照/上传解题 ===== -->
+<section id="photo" class="page">
+<div class="card"><h2>上传题目图片 或 摄像头实时捕图</h2>
+<div class="row">
+<button class="act" onclick="qs('#file').click()">🖼 上传图片</button><input type="file" id="file" accept="image/*" hidden onchange="onFile(this)">
+<button class="act" onclick="openCam()">📷 打开摄像头</button>
+<button class="sub" id="snapBtn" style="display:none" onclick="snap()">📸 捕图并解答</button>
+<button class="sub" id="camOff" style="display:none" onclick="closeCam()">关闭摄像头</button>
+</div>
+<video id="video" autoplay playsinline style="display:none"></video>
+<img id="preview" class="preview" style="display:none">
+<div class="row"><button class="sub" onclick="speak(lastText)">🔊 语音朗读解答</button><button class="sub" onclick="speechSynthesis.cancel()">⏹ 停止</button>
+<button class="sub" id="photoVary" style="display:none" onclick="variation(lastPhotoProblem,'photoOut')">🔁 变式训练</button></div>
+<div class="out" id="photoOut">支持手写/印刷题目照片，AI 将识别题目并给出详细分步解答。</div>
+</div>
+</section>
+
+<!-- ===== 设置 ===== -->
+<section id="set" class="page">
+<div class="card"><h2>API 配置（全程免费）</h2>
+<p style="font-size:13px;color:#9fb0d8;line-height:1.8">1️⃣ 打开 <b>open.bigmodel.cn</b> 免费注册 → 控制台 → API Keys 复制<br>2️⃣ 粘贴到下方保存即可。本程序使用免费的 GLM-4-Flash（文本）与 GLM-4V-Flash（识图），<b>0 成本</b>。Key 只存在你本机浏览器。</p>
+<div class="row"><input type="password" id="apikey" placeholder="粘贴你的智谱 API Key" style="flex:1">
+<button class="act" onclick="saveKey()">保存</button></div>
+</div>
+</section>
+</main>
+
+<script>
+const qs=s=>document.querySelector(s);
+let lastText="", lastQuestion="", lastPhotoProblem="";
+
+/* ---------- 导航 ---------- */
+function go(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));qs('#'+id).classList.add('show');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+
+/* ---------- API ---------- */
+function saveKey(){localStorage.setItem('zk',qs('#apikey').value.trim());keyState();alert('已保存！');}
+function keyState(){qs('#keyState').textContent=localStorage.getItem('zk')?'✅ API Key 已配置':'⚠️ 请到“设置”填入免费 API Key';}
+keyState();
+
+async function callAI(messages,model='glm-4-flash',outEl){
+  const key=localStorage.getItem('zk');
+  if(!key){outEl.textContent='⚠️ 请先到「设置」页填入免费的智谱 API Key';return null;}
+  outEl.innerHTML='<span class="spin">⏳</span> AI 思考中…';
+  try{
+    const r=await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+      body:JSON.stringify({model,messages,temperature:0.7})});
+    const d=await r.json();
+    if(d.error){outEl.textContent='❌ '+(d.error.message||JSON.stringify(d.error));return null;}
+    const t=d.choices[0].message.content;
+    lastText=t.replace(/[#*$\\]/g,'');
+    outEl.innerHTML=t.replace(/\n/g,'<br>');
+    if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([outEl]);
+    return t;
+  }catch(e){outEl.textContent='❌ 网络错误：'+e.message;return null;}
+}
+
+/* ---------- 知识讲解 ---------- */
+const TOPICS=['匀变速直线运动','牛顿第二定律','机械能守恒','动量守恒','圆周运动','万有引力与卫星','库仑定律与电场','欧姆定律与电路','安培力与洛伦兹力','电磁感应','简谐振动','机械波与干涉','光的折射与全反射','光电效应','原子核与能级'];
+TOPICS.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>explain(t);qs('#topics').appendChild(b);});
+function explain(t){if(!t)return;callAI([{role:'user',content:`你是一位顶级物理老师。请详细讲解「${t}」，要求：1.核心概念通俗解释（用生活类比）2.公式及符号含义（用LaTeX，行内$...$）3.一个典型例题及简要解法 4.三个常见易错点。条理清晰。`}],'glm-4-flash',qs('#learnOut'));}
+
+/* ---------- 语音 ---------- */
+function speak(t){if(!t)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.slice(0,2500));u.lang='zh-CN';u.rate=1.05;speechSynthesis.speak(u);}
+function listen(inputId){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert('当前浏览器不支持语音识别，建议用 Chrome/Edge');return;}const r=new SR();r.lang='zh-CN';r.onresult=e=>{qs('#'+inputId).value=e.results[0][0].transcript;};r.start();}
+
+/* ---------- 自动出题 ---------- */
+async function genQuiz(){
+  qs('#ansOut').style.display='none';
+  const t=await callAI([{role:'user',content:`请出一道高中物理「${qs('#qTopic').value}」的${qs('#qLevel').value}计算题。只给题目（含具体数字、必要物理量），不要给答案。公式用LaTeX行内$...$。`}],'glm-4-flash',qs('#quizOut'));
+  if(t){lastQuestion=t;qs('#showAns').style.display='inline-block';qs('#varyBtn').style.display='inline-block';}
+}
+function quizAnswer(){
+  qs('#ansOut').style.display='block';
+  callAI([{role:'user',content:`请对下题给出极其详细的分步解答：每一步标注【第N步】，说明用了什么物理规律、为什么这样做，公式用LaTeX，最后给出最终答案并总结方法。\n题目：${lastQuestion}`}],'glm-4-flash',qs('#ansOut'));
+}
+function variation(q,out='ansOut'){
+  const el=qs('#'+out);el.style.display='block';
+  callAI([{role:'user',content:`基于下面这道物理题，出2道变式训练题：变式1改变情境但考点相同（基础变式）；变式2在原题基础上增加一个条件提升难度（进阶变式）。每道变式都附详细分步解答。公式用LaTeX。\n原题：${q}`}],'glm-4-flash',el);
+}
+
+/* ---------- 图片/摄像头解题 ---------- */
+function onFile(inp){const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=e=>solveImage(e.target.result);rd.readAsDataURL(f);}
+let stream=null;
+async function openCam(){try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});qs('#video').srcObject=stream;qs('#video').style.display='block';qs('#snapBtn').style.display='inline-block';qs('#camOff').style.display='inline-block';}catch(e){alert('无法打开摄像头：'+e.message);}}
+function closeCam(){if(stream)stream.getTracks().forEach(t=>t.stop());qs('#video').style.display='none';qs('#snapBtn').style.display='none';qs('#camOff').style.display='none';}
+function snap(){const v=qs('#video'),c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);solveImage(c.toDataURL('image/jpeg',0.85));}
+async function solveImage(dataUrl){
+  qs('#preview').src=dataUrl;qs('#preview').style.display='block';
+  const t=await callAI([{role:'user',content:[
+    {type:'image_url',image_url:{url:dataUrl}},
+    {type:'text',text:'这是一道物理题的照片。请：1.先完整转写题目文字 2.给出极其详细的分步解答（每步标【第N步】并说明依据的物理规律）3.最终答案。公式用LaTeX行内$...$。'}
+  ]}],'glm-4v-flash',qs('#photoOut'));
+  if(t){lastPhotoProblem=t;lastText=t.replace(/[#*$\\]/g,'');qs('#photoVary').style.display='inline-block';speak('解答完成，'+lastText.slice(0,300));}
+}
+
+/* ================= 互动物理动画引擎 ================= */
+/* --- 抛体 --- */
+const c1=qs('#c1'),x1=c1.getContext('2d');let projs=[],trails=[];
+function fire(){const v=+qs('#v0').value,a=+qs('#ang').value*Math.PI/180;projs.push({x:30,y:300,vx:v*Math.cos(a)*4,vy:-v*Math.sin(a)*4,trail:[]});}
+function drawProj(){
+  x1.clearRect(0,0,900,320);x1.strokeStyle='#33406e';x1.beginPath();x1.moveTo(0,302);x1.lineTo(900,302);x1.stroke();
+  projs.forEach(p=>{p.x+=p.vx*0.016;p.y+=p.vy*0.016;p.vy+=9.8*4*0.016*4;if(p.y>300){p.y=300;p.vx=0;p.vy=0;}p.trail.push([p.x,p.y]);
+    x1.strokeStyle='rgba(120,150,255,.6)';x1.beginPath();p.trail.forEach((q,i)=>i?x1.lineTo(q[0],q[1]):x1.moveTo(q[0],q[1]));x1.stroke();
+    x1.fillStyle='#ffcf5e';x1.beginPath();x1.arc(p.x,p.y,7,0,7);x1.fill();
+    // 速度矢量分解
+    if(p.vx||p.vy){x1.strokeStyle='#7ee0a3';arrow(x1,p.x,p.y,p.x+p.vx*.25,p.y);x1.strokeStyle='#f77';arrow(x1,p.x,p.y,p.x,p.y+p.vy*.25);}});
+  if(projs.length>6)projs.shift();
+  requestAnimationFrame(drawProj);
+}
+function arrow(ctx,x0,y0,x2,y2){ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x2,y2);ctx.stroke();}
+drawProj();
+
+/* --- 波干涉 --- */
+const c2=qs('#c2'),x2c=c2.getContext('2d',{willReadFrequently:true});let waveOn=true,wt=0;
+function toggleWave(){waveOn=!waveOn;}
+function drawWave(){
+  if(waveOn){wt+=0.05;const f=+qs('#freq').value;
+    const img=x2c.createImageData(300,100);// 低分辨率提速
+    for(let j=0;j<100;j++)for(let i=0;i<300;i++){
+      const d1=Math.hypot(i-90,j-50),d2=Math.hypot(i-210,j-50);
+      const v=Math.sin(d1*0.25*f-wt*f*2)+Math.sin(d2*0.25*f-wt*f*2);
+      const k=(j*300+i)*4,b=128+v*60;
+      img.data[k]=b*0.35;img.data[k+1]=b*0.55;img.data[k+2]=Math.min(255,b*1.2);img.data[k+3]=255;}
+    const off=new OffscreenCanvas(300,100);off.getContext('2d').putImageData(img,0,0);
+    x2c.imageSmoothingEnabled=true;x2c.drawImage(off,0,0,300,100,0,0,900,300);
+    x2c.fillStyle='#ffcf5e';[[270,150],[630,150]].forEach(s=>{x2c.beginPath();x2c.arc(s[0],s[1],6,0,7);x2c.fill();});}
+  requestAnimationFrame(drawWave);
+}
+drawWave();
+
+/* --- 单摆 --- */
+const c3=qs('#c3'),x3=c3.getContext('2d');let th=0.7,om=0,drag=false;
+const PX=450,PY=30;
+c3.addEventListener('pointerdown',e=>{drag=true;om=0;movePend(e);});
+c3.addEventListener('pointermove',e=>drag&&movePend(e));
+window.addEventListener('pointerup',()=>drag=false);
+function movePend(e){const r=c3.getBoundingClientRect();const mx=(e.clientX-r.left)*900/r.width,my=(e.clientY-r.top)*320/r.height;th=Math.atan2(mx-PX,my-PY);}
+function drawPend(){
+  const L=+qs('#Lp').value,Lpx=L*80;
+  if(!drag){const a=-9.8/L*Math.sin(th);om+=a*0.016;om*=0.999;th+=om*0.016;}
+  const bx=PX+Lpx*Math.sin(th),by=PY+Lpx*Math.cos(th);
+  x3.clearRect(0,0,900,320);
+  x3.strokeStyle='#556';x3.beginPath();x3.moveTo(PX-40,PY);x3.lineTo(PX+40,PY);x3.stroke();
+  x3.strokeStyle='#9fb0d8';x3.beginPath();x3.moveTo(PX,PY);x3.lineTo(bx,by);x3.stroke();
+  x3.fillStyle='#9b59f7';x3.beginPath();x3.arc(bx,by,14,0,7);x3.fill();
+  x3.fillStyle='#7ee0a3';x3.font='13px sans-serif';
+  x3.fillText(`周期 T≈2π√(L/g)=${(2*Math.PI*Math.sqrt(L/9.8)).toFixed(2)} s   角度 ${(th*180/Math.PI).toFixed(1)}°`,20,24);
+  requestAnimationFrame(drawPend);
+}
+drawPend();
+</script>
+</body>
+</html>
