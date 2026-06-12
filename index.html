@@ -3,43 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ 理科超级学习利器 v3.0</title>
-<script>
-window.MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath:[['$$','$$']] } };
-</script>
+<title>⚡ 理科超级学习利器 v3.2</title>
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$']]}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
 <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:"PingFang SC","Microsoft YaHei",sans-serif; }
-body { background:#0f1424; color:#e8ecf5; min-height:100vh; }
-header { background:linear-gradient(90deg,#1a2347,#2b1a47); padding:14px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-header h1 { font-size:20px; }
-nav { display:flex; gap:6px; flex-wrap:wrap; padding:10px 16px; background:#141a30; position:sticky; top:0; z-index:10;}
-nav button { background:#222b4d; color:#cfd8f5; border:none; padding:9px 13px; border-radius:20px; cursor:pointer; font-size:13px;}
-nav button.active { background:linear-gradient(90deg,#4f6ef7,#9b59f7); color:#fff; }
-main { padding:16px; max-width:960px; margin:0 auto; }
-.page { display:none; } .page.show { display:block; }
-.card { background:#1a2138; border:1px solid #2b3760; border-radius:14px; padding:16px; margin-bottom:14px; }
-.card h2 { font-size:16px; color:#8fa6ff; margin-bottom:10px; }
-button.act { background:linear-gradient(90deg,#4f6ef7,#9b59f7); border:none; color:#fff; padding:10px 18px; border-radius:10px; cursor:pointer; font-size:14px; margin:4px 4px 4px 0;}
-button.sub { background:#2b3760; border:none; color:#cfd8f5; padding:8px 14px; border-radius:10px; cursor:pointer; font-size:13px; margin:4px 4px 4px 0;}
-button:disabled { opacity:.5; cursor:not-allowed; }
-select,input[type=text],input[type=password] { background:#10162b; color:#fff; border:1px solid #33406e; border-radius:8px; padding:9px; font-size:14px; }
-.out { background:#10162b; border-radius:10px; padding:14px; margin-top:10px; min-height:40px; line-height:1.85; font-size:15px; white-space:pre-wrap; word-break:break-word;}
-canvas.sim { background:#0a0e1c; border-radius:10px; width:100%; touch-action:none; }
-.row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:6px 0;}
-.row label { font-size:13px; color:#9fb0d8; }
-input[type=range] { accent-color:#6c84ff; }
-.chips { display:flex; gap:6px; flex-wrap:wrap; margin:6px 0;}
-.chips button { background:#243056; color:#cfe; border:none; padding:7px 12px; border-radius:16px; cursor:pointer; font-size:13px;}
-.chips.math button { background:#2e2450; }
-#video,#vsrc { width:100%; border-radius:10px; background:#000; }
-img.preview { max-width:100%; border-radius:10px; margin-top:8px; }
-.tag { font-size:12px; color:#7ee0a3; }
-.info3d { font-size:13px; color:#7ee0a3; margin-top:6px; }
-.hint { font-size:13px; color:#9fb0d8; line-height:1.8; }
-.spin { display:inline-block; animation:r 1s linear infinite;} @keyframes r{to{transform:rotate(360deg)}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+body{background:#0f1424;color:#e8ecf5;min-height:100vh}
+header{background:linear-gradient(90deg,#1a2347,#2b1a47);padding:14px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header h1{font-size:20px}
+nav{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;background:#141a30;position:sticky;top:0;z-index:10}
+nav button{background:#222b4d;color:#cfd8f5;border:none;padding:9px 13px;border-radius:20px;cursor:pointer;font-size:13px}
+nav button.active{background:linear-gradient(90deg,#4f6ef7,#9b59f7);color:#fff}
+main{padding:16px;max-width:960px;margin:0 auto}
+.page{display:none}.page.show{display:block}
+.card{background:#1a2138;border:1px solid #2b3760;border-radius:14px;padding:16px;margin-bottom:14px}
+.card h2{font-size:16px;color:#8fa6ff;margin-bottom:10px}
+button.act{background:linear-gradient(90deg,#4f6ef7,#9b59f7);border:none;color:#fff;padding:10px 18px;border-radius:10px;cursor:pointer;font-size:14px;margin:4px 4px 4px 0}
+button.sub{background:#2b3760;border:none;color:#cfd8f5;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:13px;margin:4px 4px 4px 0}
+select,input[type=text],input[type=password]{background:#10162b;color:#fff;border:1px solid #33406e;border-radius:8px;padding:9px;font-size:14px}
+.out{background:#10162b;border-radius:10px;padding:14px;margin-top:10px;min-height:40px;line-height:1.85;font-size:15px;white-space:pre-wrap;word-break:break-word}
+canvas.sim{background:#0a0e1c;border-radius:10px;width:100%;touch-action:none}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0}
+.row label{font-size:13px;color:#9fb0d8}
+input[type=range]{accent-color:#6c84ff}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.chips button{background:#243056;color:#cfe;border:none;padding:7px 12px;border-radius:16px;cursor:pointer;font-size:13px}
+.chips.math button{background:#2e2450}
+#video,#vsrc{width:100%;border-radius:10px;background:#000}
+img.preview{max-width:100%;border-radius:10px;margin-top:8px}
+#thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+#thumbs img{width:90px;height:90px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid #33406e}
+.tag{font-size:12px;color:#7ee0a3}
+.info3d{font-size:13px;color:#7ee0a3;margin-top:6px}
+.hint{font-size:13px;color:#9fb0d8;line-height:1.8}
+.spin{display:inline-block;animation:r 1s linear infinite}@keyframes r{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -57,7 +56,6 @@ img.preview { max-width:100%; border-radius:10px; margin-top:8px; }
 </nav>
 <main>
 
-<!-- ===== 知识讲解 ===== -->
 <section id="learn" class="page show">
 <div class="card"><h2>⚛️ 物理知识点</h2><div class="chips" id="topicsP"></div></div>
 <div class="card"><h2>📐 数学知识点</h2><div class="chips math" id="topicsM"></div></div>
@@ -65,10 +63,28 @@ img.preview { max-width:100%; border-radius:10px; margin-top:8px; }
 <div class="row"><input type="text" id="customTopic" placeholder="输入任意问题，如：洛必达法则怎么用？" style="flex:1">
 <button class="act" onclick="explain(qs('#customTopic').value)">讲解</button></div>
 <div class="row"><button class="sub" onclick="speak(lastText)">🔊 朗读</button><button class="sub" onclick="speechSynthesis.cancel()">⏹ 停止</button><button class="sub" onclick="listen('customTopic')">🎤 语音提问</button></div>
-<div class="out" id="learnOut">点击上方知识点，AI 老师将给出详细讲解（含公式推导、典型例题、易错点）。</div>
+<div class="out" id="learnOut">点击上方知识点，AI 老师给出详细讲解（公式推导、典型例题、易错点）。</div>
+</div>
 </section>
 
-<!-- ===== 数学函数实验室 ===== -->
+<section id="mathlab" class="page">
+<div class="card"><h2>📈 函数图象实验室（输入 f(x)，拖参数 a 看图象变化）</h2>
+<div class="row"><input type="text" id="fx" value="a*sin(x)+x/3" style="flex:1" oninput="drawFx()">
+<button class="sub" onclick="setFx('a*x^2-2*x+1')">二次</button>
+<button class="sub" onclick="setFx('sin(a*x)')">三角</button>
+<button class="sub" onclick="setFx('a^x')">指数</button>
+<button class="sub" onclick="setFx('x^3-a*x')">三次</button>
+<button class="sub" onclick="setFx('a*log(x)/x')">lnx/x</button></div>
+<div class="row"><label>参数 a = <span id="av">1.0</span></label>
+<input type="range" id="aSlider" min="-3" max="3" step="0.1" value="1" style="flex:1" oninput="qs('#av').textContent=(+this.value).toFixed(1);drawFx()">
+<label><input type="checkbox" id="showD" onchange="drawFx()"> 导函数 f′(x)（虚线）</label></div>
+<canvas id="cm" class="sim" width="900" height="420"></canvas>
+<p class="hint">支持 + - * / ^ ( )、sin cos tan、log(=ln)、log10、sqrt、abs、exp、pi、e。勾选导函数观察：f′>0 区间 f 递增，f′=0 处为极值点。</p>
+<div class="row"><button class="act" onclick="explainFx()">🤖 AI 分析此函数（单调性/极值/考点）</button></div>
+<div class="out" id="fxOut" style="display:none"></div>
+</div>
+</section>
+
 <section id="ggb" class="page">
 <div class="card"><h2>🧮 GeoGebra 互动数学画板（官方完整版内嵌）</h2>
 <div class="row">
@@ -78,6 +94,294 @@ img.preview { max-width:100%; border-radius:10px; margin-top:8px; }
 <option value="3d">3D 绘图</option>
 <option value="classic">经典全功能</option>
 </select>
+<button class="act" onclick="loadGGB()">加载 / 切换</button>
+</div>
+<div class="chips">
+<button onclick="ggbDemo('tangent')">导数·动态切线</button>
+<button onclick="ggbDemo('para')">抛物线 abc 滑块</button>
+<button onclick="ggbDemo('trig')">单位圆⇆正弦曲线</button>
+<button onclick="ggbDemo('conic')">椭圆定义(拖P点)</button>
+</div>
+<div id="ggbDiv" style="background:#fff;border-radius:10px;min-height:480px"></div>
+<p class="hint">画板内可直接拖动滑块/点，代数区可输入任意表达式，工具栏可作垂线、切线、轨迹等。首次加载约几秒。</p>
+</div>
+<div class="card"><h2>🤖 AI 生成互动图形（一句话→自动搭好滑块和图）</h2>
+<div class="row"><input type="text" id="ggbReq" placeholder="例：画 y=a·sin(bx+c)，a b c 都用滑块；或：演示三角形外心随顶点移动" style="flex:1">
+<button class="act" onclick="aiGGB()">生成</button>
+<button class="sub" onclick="listen('ggbReq')">🎤</button></div>
+<div class="out" id="ggbOut">AI 会把你的需求翻译成 GeoGebra 指令并直接画进上面的画板，然后你就可以亲手拖动探索。</div>
+</div>
+</section>
+
+<section id="lab" class="page">
+<div class="card"><h2>🚀 抛体运动</h2>
+<div class="row"><label>初速度 <span id="v0v">25</span> m/s</label><input type="range" id="v0" min="5" max="50" value="25" oninput="qs('#v0v').textContent=this.value">
+<label>角度 <span id="angv">45</span>°</label><input type="range" id="ang" min="10" max="80" value="45" oninput="qs('#angv').textContent=this.value">
+<button class="act" onclick="fire()">发射</button></div>
+<canvas id="c1" class="sim" width="900" height="320"></canvas></div>
+<div class="card"><h2>🌊 波的干涉</h2>
+<div class="row"><label>频率 <span id="fv">2</span> Hz</label><input type="range" id="freq" min="1" max="5" value="2" oninput="qs('#fv').textContent=this.value">
+<button class="sub" onclick="waveOn=!waveOn">▶ 播放/暂停</button></div>
+<canvas id="c2" class="sim" width="900" height="300"></canvas></div>
+<div class="card"><h2>🕰 单摆（拖动小球释放）</h2>
+<div class="row"><label>摆长 <span id="Lv">1.5</span> m</label><input type="range" id="Lp" min="0.5" max="3" step="0.1" value="1.5" oninput="qs('#Lv').textContent=this.value"></div>
+<canvas id="c3" class="sim" width="900" height="320"></canvas></div>
+</section>
+
+<section id="lab3d" class="page">
+<div class="card"><h2>🛰 卫星轨道 3D — 拖动旋转视角</h2>
+<div class="row"><label>发射速度 = <span id="orbVv">1.0</span> × 第一宇宙速度</label>
+<input type="range" id="orbV" min="0.5" max="1.55" step="0.05" value="1.0" oninput="qs('#orbVv').textContent=this.value">
+<button class="act" onclick="resetOrbit()">🚀 重新发射</button></div>
+<canvas id="t1" class="sim" width="900" height="450"></canvas>
+<div class="info3d" id="orbInfo"></div>
+<div class="info3d">1.0×→圆轨道；1.2×→椭圆；0.7×→坠落；1.5×→接近逃逸（v逃=√2·v圆）</div></div>
+<div class="card"><h2>⚛ 带电粒子磁场 3D 螺旋（洛伦兹力）</h2>
+<div class="row"><label>磁感应强度 B <span id="Bv">1.5</span></label><input type="range" id="Bs" min="0.5" max="3" step="0.1" value="1.5" oninput="qs('#Bv').textContent=this.value">
+<label>沿 B 方向速度 <span id="vpv">1.5</span></label><input type="range" id="vp" min="0" max="3" step="0.1" value="1.5" oninput="qs('#vpv').textContent=this.value"></div>
+<canvas id="t2" class="sim" width="900" height="450"></canvas>
+<div class="info3d">绿色箭头为 B 方向。r=mv⊥/qB：B 越大圈越小；沿 B 速度为 0 → 纯圆周。</div></div>
+</section>
+
+<section id="quiz" class="page">
+<div class="card"><h2>AI 自动出题 → 分步解析 → 变式训练</h2>
+<div class="row">
+<select id="qSubj" onchange="fillTopics()"><option>物理</option><option>数学</option></select>
+<select id="qTopic"></select>
+<select id="qLevel"><option>基础</option><option selected>中等</option><option>难题</option><option>竞赛级</option></select>
+<button class="act" onclick="genQuiz()">📝 出一道题</button></div>
+<div class="out" id="quizOut">选择学科、章节和难度，AI 现场命题。</div>
+<div class="row"><button class="sub" id="showAns" style="display:none" onclick="quizAnswer()">💡 分步解答</button>
+<button class="sub" id="varyBtn" style="display:none" onclick="variation(lastQuestion)">🔁 变式训练</button>
+<button class="sub" onclick="speak(lastText)">🔊 朗读</button></div>
+<div class="out" id="ansOut" style="display:none"></div>
+</div>
+</section>
+
+<section id="photo" class="page">
+<div class="card"><h2>多图解题：相册多选 或 摄像头连拍（最多 6 张）</h2>
+<div class="row">
+<button class="act" onclick="qs('#file').click()">🖼 上传图片(可多选)</button>
+<input type="file" id="file" accept="image/*" multiple hidden onchange="addImgs(this.files);this.value=''">
+<button class="act" onclick="openCam()">📷 打开摄像头</button>
+<button class="sub" id="snapBtn" style="display:none" onclick="snap()">📸 拍一张</button>
+<button class="sub" id="camOff" style="display:none" onclick="closeCam()">关闭摄像头</button>
+</div>
+<video id="video" autoplay playsinline style="display:none"></video>
+<div id="thumbs"></div>
+<p class="hint" id="imgCount"></p>
+<div class="row">
+<button class="act" id="solveBtn" style="display:none" onclick="solveImages()">🧮 解答（共<span id="nImg">0</span>张）</button>
+<button class="sub" onclick="imgs=[];renderThumbs()">🗑 清空</button>
+<button class="sub" onclick="speak(lastText)">🔊 朗读</button>
+<button class="sub" id="photoVary" style="display:none" onclick="variation(lastPhotoProblem,'photoOut')">🔁 变式训练</button></div>
+<img id="preview" class="preview" style="display:none">
+<div class="out" id="photoOut">物理、数学题都行。多张图会自动拼接（或在设置中开启「多图直传」）。</div>
+</div>
+</section>
+
+<section id="vidlab" class="page">
+<div class="card"><h2>🎬 上传视频 → AI 用物理规律解释现象</h2>
+<p class="hint">拍一段现象（落体/碰撞/单摆/旋转…），自动抽 6 个带时间戳关键帧交给 AI 分析。建议 ≤30 秒。</p>
+<div class="row"><button class="act" onclick="qs('#vfile').click()">📹 上传/拍摄视频</button>
+<input type="file" id="vfile" accept="video/*" capture="environment" hidden onchange="onVideo(this)"></div>
+<div class="row"><input type="text" id="vq" placeholder="（可选）想问的具体问题" style="flex:1"></div>
+<video id="vsrc" controls playsinline muted style="display:none"></video>
+<img id="vframes" class="preview" style="display:none">
+<div class="row"><button class="sub" onclick="speak(lastText)">🔊 朗读</button><button class="sub" onclick="speechSynthesis.cancel()">⏹ 停止</button></div>
+<div class="out" id="vidOut">上传视频后自动开始分析。</div>
+</div>
+</section>
+
+<section id="set" class="page">
+<div class="card"><h2>API 配置（任何 OpenAI 兼容平台都行）</h2>
+<div class="chips">
+<button onclick="usePreset('zhipu')">预设：智谱(默认免费)</button>
+<button onclick="usePreset('silicon')">预设：硅基流动</button>
+<button onclick="usePreset('router')">预设：OpenRouter</button></div>
+<div class="row"><label style="width:90px">接口地址</label><input type="text" id="cfgBase" style="flex:1"></div>
+<div class="row"><label style="width:90px">文本模型</label><input type="text" id="cfgTm" style="flex:1"></div>
+<div class="row"><label style="width:90px">视觉模型</label><input type="text" id="cfgVm" style="flex:1"></div>
+<div class="row"><label style="width:90px">API Key</label><input type="password" id="cfgKey" style="flex:1"></div>
+<div class="row"><label><input type="checkbox" id="cfgMulti"> 多图直传（所用视觉模型支持一次多张图时勾选；不勾则自动拼图，最稳妥）</label></div>
+<div class="row"><button class="act" onclick="saveCfg()">保存配置</button></div>
+<p class="hint">智谱 open.bigmodel.cn 免费；硅基流动 siliconflow.cn 注册送额度；OpenRouter openrouter.ai 带 :free 后缀的模型免费（模型名以各平台官网为准，照原样复制）。被限流就换一家，Key 只存你本机。</p>
+</div>
+</section>
+</main>
+
+<script>
+const qs=s=>document.querySelector(s);
+let lastText="",lastQuestion="",lastPhotoProblem="";
+
+/* ---------- 导航 ---------- */
+function go(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));qs('#'+id).classList.add('show');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(id==='lab3d')init3D();if(id==='mathlab')drawFx();}
+
+/* ---------- 通用 API ---------- */
+const PRESETS={
+ zhipu:{base:'https://open.bigmodel.cn/api/paas/v4/chat/completions',t:'glm-4-flash',v:'glm-4v-flash'},
+ silicon:{base:'https://api.siliconflow.cn/v1/chat/completions',t:'Qwen/Qwen2.5-7B-Instruct',v:'THUDM/GLM-4.1V-9B-Thinking'},
+ router:{base:'https://openrouter.ai/api/v1/chat/completions',t:'meta-llama/llama-3.3-70b-instruct:free',v:'qwen/qwen2.5-vl-32b-instruct:free'}};
+function usePreset(k){const p=PRESETS[k];qs('#cfgBase').value=p.base;qs('#cfgTm').value=p.t;qs('#cfgVm').value=p.v;}
+function getCfg(){return{base:localStorage.getItem('base')||PRESETS.zhipu.base,tm:localStorage.getItem('tm')||PRESETS.zhipu.t,vm:localStorage.getItem('vm')||PRESETS.zhipu.v,key:localStorage.getItem('zk')||'',multi:localStorage.getItem('multi')==='1'};}
+function saveCfg(){localStorage.setItem('base',qs('#cfgBase').value.trim()||PRESETS.zhipu.base);localStorage.setItem('tm',qs('#cfgTm').value.trim()||PRESETS.zhipu.t);localStorage.setItem('vm',qs('#cfgVm').value.trim()||PRESETS.zhipu.v);if(qs('#cfgKey').value.trim())localStorage.setItem('zk',qs('#cfgKey').value.trim());localStorage.setItem('multi',qs('#cfgMulti').checked?'1':'0');keyState();alert('已保存！');}
+function loadCfgUI(){const c=getCfg();qs('#cfgBase').value=c.base;qs('#cfgTm').value=c.tm;qs('#cfgVm').value=c.vm;qs('#cfgMulti').checked=c.multi;keyState();}
+function keyState(){qs('#keyState').textContent=getCfg().key?'✅ API 已配置':'⚠️ 请到「设置」配置 API Key';}
+
+async function callAI(messages,vision,outEl){
+  const c=getCfg();
+  if(!c.key){outEl.textContent='⚠️ 请先到「设置」页配置 API Key';return null;}
+  outEl.innerHTML='<span class="spin">⏳</span> AI 思考中…';
+  try{
+    const r=await fetch(c.base,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+c.key},
+      body:JSON.stringify({model:vision?c.vm:c.tm,messages,temperature:0.7})});
+    const d=await r.json();
+    if(!r.ok||d.error){outEl.textContent='❌ '+(d.error&&(d.error.message||d.error.code)||r.status)+'\n💡 若是限流/欠费，去「设置」切换其他平台预设即可。';return null;}
+    const t=d.choices[0].message.content;
+    lastText=t.replace(/[#*$\\]/g,'');
+    outEl.innerHTML=t.replace(/\n/g,'<br>');
+    if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([outEl]);
+    return t;
+  }catch(e){outEl.textContent='❌ 网络错误：'+e.message;return null;}
+}
+
+/* ---------- 知识讲解 ---------- */
+const TP=['匀变速直线运动','牛顿第二定律','机械能守恒','动量守恒','圆周运动','万有引力与卫星','库仑定律与电场','欧姆定律与电路','安培力与洛伦兹力','电磁感应','简谐振动','机械波与干涉','光的折射与全反射','光电效应','原子核与能级'];
+const TM=['集合与函数','二次函数与不等式','三角函数与解三角形','平面向量','数列','导数及其应用','立体几何','直线与圆','圆锥曲线','排列组合与二项式','概率与统计','复数'];
+TP.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>explain(t);qs('#topicsP').appendChild(b);});
+TM.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>explain(t);qs('#topicsM').appendChild(b);});
+function explain(t){if(!t)return;callAI([{role:'user',content:`你是顶级理科老师。详细讲解「${t}」：1.核心概念通俗解释（生活类比）2.关键公式/定理及含义（LaTeX行内$...$）3.一个典型例题及解法 4.三个易错点。`}],false,qs('#learnOut'));}
+
+/* ---------- 语音 ---------- */
+function speak(t){if(!t)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.slice(0,2500));u.lang='zh-CN';u.rate=1.05;speechSynthesis.speak(u);}
+function listen(id){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert('浏览器不支持语音识别，建议 Chrome/Edge');return;}const r=new SR();r.lang='zh-CN';r.onresult=e=>{qs('#'+id).value=e.results[0][0].transcript;};r.start();}
+
+/* ---------- 出题 ---------- */
+const QT={'物理':['运动学','牛顿定律','功和能','动量','圆周运动与万有引力','静电场','电路','磁场与电磁感应','机械振动与波','光学','热学','近代物理'],
+'数学':['函数与方程','三角函数','数列','导数','不等式','平面向量','立体几何','解析几何','圆锥曲线','排列组合','概率统计','复数']};
+function fillTopics(){const s=qs('#qSubj').value;qs('#qTopic').innerHTML=QT[s].map(t=>`<option>${t}</option>`).join('');}
+fillTopics();
+async function genQuiz(){
+  qs('#ansOut').style.display='none';
+  const t=await callAI([{role:'user',content:`请出一道高中${qs('#qSubj').value}「${qs('#qTopic').value}」的${qs('#qLevel').value}题（含具体数字/条件），只给题目不给答案。公式用LaTeX行内$...$。`}],false,qs('#quizOut'));
+  if(t){lastQuestion=t;qs('#showAns').style.display='inline-block';qs('#varyBtn').style.display='inline-block';}
+}
+function quizAnswer(){qs('#ansOut').style.display='block';
+  callAI([{role:'user',content:`对下题给出极详细分步解答：每步标【第N步】，说明依据的定理/规律和思路来源，公式用LaTeX，最后给最终答案和方法总结。\n题目：${lastQuestion}`}],false,qs('#ansOut'));}
+function variation(q,out='ansOut'){const el=qs('#'+out);el.style.display='block';
+  callAI([{role:'user',content:`基于此题出2道变式：变式1换情境同考点（基础）；变式2加条件升难度（进阶）。均附详细分步解答，公式用LaTeX。\n原题：${q}`}],false,el);}
+
+/* ---------- 多图解题 ---------- */
+let imgs=[],stream=null;
+function addImgs(files){[...files].forEach(f=>{if(imgs.length>=6)return;const rd=new FileReader();rd.onload=e=>{imgs.push(e.target.result);renderThumbs();};rd.readAsDataURL(f);});}
+function renderThumbs(){
+  const d=qs('#thumbs');d.innerHTML='';
+  imgs.forEach((u,i)=>{const im=document.createElement('img');im.src=u;im.onclick=()=>{imgs.splice(i,1);renderThumbs();};d.appendChild(im);});
+  qs('#solveBtn').style.display=imgs.length?'inline-block':'none';
+  qs('#nImg').textContent=imgs.length;
+  qs('#imgCount').textContent=imgs.length?`已选 ${imgs.length}/6 张，点缩略图可删除`:'';
+}
+async function openCam(){try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});qs('#video').srcObject=stream;qs('#video').style.display='block';qs('#snapBtn').style.display='inline-block';qs('#camOff').style.display='inline-block';}catch(e){alert('无法打开摄像头：'+e.message);}}
+function closeCam(){if(stream)stream.getTracks().forEach(t=>t.stop());['video','snapBtn','camOff'].forEach(i=>qs('#'+i).style.display='none');}
+function snap(){if(imgs.length>=6){alert('最多6张');return;}const v=qs('#video'),c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);imgs.push(c.toDataURL('image/jpeg',0.85));renderThumbs();}
+function loadIm(u){return new Promise(r=>{const im=new Image();im.onload=()=>r(im);im.src=u;});}
+async function composite(list){
+  const ims=await Promise.all(list.map(loadIm));
+  const W=640,hs=ims.map(im=>Math.round(W*im.height/im.width));
+  const c=document.createElement('canvas');c.width=W;c.height=hs.reduce((s,h)=>s+h+34,0);
+  const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);
+  let y=0;
+  ims.forEach((im,i)=>{ctx.fillStyle='#c00';ctx.font='bold 22px sans-serif';ctx.fillText('【图'+(i+1)+'】',8,y+24);y+=34;ctx.drawImage(im,0,y,W,hs[i]);y+=hs[i];});
+  return c.toDataURL('image/jpeg',0.82);
+}
+async function solveImages(){
+  if(!imgs.length)return;
+  const content=[];
+  if(getCfg().multi&&imgs.length>1){
+    imgs.forEach(u=>content.push({type:'image_url',image_url:{url:u}}));
+    qs('#preview').style.display='none';
+  }else{
+    const u=imgs.length>1?await composite(imgs):imgs[0];
+    qs('#preview').src=u;qs('#preview').style.display='block';
+    content.push({type:'image_url',image_url:{url:u}});
+  }
+  content.push({type:'text',text:`这是${imgs.length>1?'同一道（或几道）题的'+imgs.length+'张图片，按【图N】标注顺序阅读':'一道'}物理或数学题。请：1.完整转写题目 2.极详细分步解答（每步标【第N步】并说明依据的定理/规律）3.最终答案。公式用LaTeX行内$...$。`});
+  const t=await callAI([{role:'user',content}],true,qs('#photoOut'));
+  if(t){lastPhotoProblem=t;qs('#photoVary').style.display='inline-block';speak('解答完成，'+lastText.slice(0,300));}
+}
+
+/* ---------- 视频分析 ---------- */
+function seekTo(v,t){return new Promise(r=>{v.onseeked=()=>r();v.currentTime=t;});}
+async function onVideo(inp){
+  const f=inp.files[0];if(!f)return;
+  const out=qs('#vidOut');out.innerHTML='<span class="spin">⏳</span> 抽取关键帧…';
+  const v=qs('#vsrc');v.src=URL.createObjectURL(f);v.style.display='block';v.muted=true;
+  await new Promise(r=>v.onloadedmetadata=r);
+  if(!isFinite(v.duration)){v.currentTime=1e7;await new Promise(r=>setTimeout(r,500));v.currentTime=0;}
+  const dur=isFinite(v.duration)?v.duration:10;
+  const N=6,fw=320,fh=Math.max(80,Math.round(fw*v.videoHeight/Math.max(1,v.videoWidth)));
+  const c=document.createElement('canvas');c.width=fw*3;c.height=fh*2;const ctx=c.getContext('2d');
+  for(let i=0;i<N;i++){
+    const t=dur*(i+0.5)/N;await seekTo(v,t);await new Promise(r=>setTimeout(r,120));
+    const x=(i%3)*fw,y=Math.floor(i/3)*fh;
+    ctx.drawImage(v,x,y,fw,fh);
+    ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(x,y,86,22);
+    ctx.fillStyle='#ffe45e';ctx.font='bold 14px sans-serif';ctx.fillText('t='+t.toFixed(1)+'s',x+5,y+16);}
+  v.currentTime=0;
+  const dataUrl=c.toDataURL('image/jpeg',0.8);
+  qs('#vframes').src=dataUrl;qs('#vframes').style.display='block';
+  const extra=qs('#vq').value.trim();
+  const t=await callAI([{role:'user',content:[
+    {type:'image_url',image_url:{url:dataUrl}},
+    {type:'text',text:`这是一段物理现象视频按时间顺序截取的6帧（从左到右、从上到下，左上角标时刻）。请：1.【现象描述】按时间顺序描述运动过程 2.【物理解释】指出物理现象并用规律详细解释（LaTeX行内$...$）3.【定量估算】结合时间戳估算速度/加速度/周期等并说明思路 4.【知识延伸】1个知识点拓展+1个生活同类现象。${extra?'\n重点回答：'+extra:''}`}
+  ]}],true,out);
+  if(t)speak('视频分析完成。'+lastText.slice(0,300));
+}
+
+/* ---------- 函数图象实验室 ---------- */
+const cm=qs('#cm'),mxc=cm.getContext('2d');
+function setFx(s){qs('#fx').value=s;drawFx();}
+function compileFx(expr){
+  try{
+    let s=expr.replace(/\^/g,'**')
+      .replace(/\b(sin|cos|tan|asin|acos|atan|sqrt|abs|exp|log10|log|floor|ceil)\b/g,'Math.$1')
+      .replace(/\bpi\b/gi,'Math.PI').replace(/\be\b/g,'Math.E');
+    const f=new Function('x','a','return '+s);f(1,1);return f;
+  }catch(e){return null;}
+}
+function plotCurve(f,a,col,dash,h){
+  mxc.strokeStyle=col;mxc.lineWidth=2;mxc.setLineDash(dash);mxc.beginPath();
+  let pen=false;
+  for(let px=0;px<=900;px++){
+    const x=(px-450)/42;
+    let y=h?(f(x+1e-4,a)-f(x-1e-4,a))/2e-4:f(x,a);
+    if(!isFinite(y)||Math.abs(y)>50){pen=false;continue;}
+    const py=210-y*42;
+    pen?mxc.lineTo(px,py):mxc.moveTo(px,py);pen=true;}
+  mxc.stroke();mxc.setLineDash([]);
+}
+function drawFx(){
+  mxc.clearRect(0,0,900,420);
+  mxc.strokeStyle='#1d2742';mxc.lineWidth=1;
+  for(let g=450%42;g<900;g+=42){mxc.beginPath();mxc.moveTo(g,0);mxc.lineTo(g,420);mxc.stroke();}
+  for(let g=210%42;g<420;g+=42){mxc.beginPath();mxc.moveTo(0,g);mxc.lineTo(900,g);mxc.stroke();}
+  mxc.strokeStyle='#44507e';mxc.beginPath();mxc.moveTo(0,210);mxc.lineTo(900,210);mxc.moveTo(450,0);mxc.lineTo(450,420);mxc.stroke();
+  mxc.fillStyle='#667';mxc.font='11px sans-serif';
+  for(let n=-10;n<=10;n+=2)if(n)mxc.fillText(n,450+n*42-6,224);
+  for(let n=-4;n<=4;n++)if(n)mxc.fillText(n,456,210-n*42+4);
+  const f=compileFx(qs('#fx').value),a=+qs('#aSlider').value;
+  if(!f){mxc.fillStyle='#f77';mxc.font='15px sans-serif';mxc.fillText('表达式有误，请检查',20,30);return;}
+  plotCurve(f,a,'#6c84ff',[],false);
+  if(qs('#showD').checked)plotCurve(f,a,'#ff9e6c',[7,5],true);
+  mxc.font='14px sans-serif';mxc.fillStyle='#6c84ff';mxc.fillText('f(x)='+qs('#fx').value+'   (a='+a.toFixed(1)+')',14,20);
+  if(qs('#showD').checked){mxc.fillStyle='#ff9e6c';mxc.fillText("f'(x) 虚线",14,40);}
+}
+function explainFx(){
+  const el=qs('#fxOut');el.style.display='block';
+  callAI([{role:'user',content:`作为数学老师分析函数 f(x)=${qs('#fx').value}（参数 a=${qs('#aSlider').value}）：1.定义域 2.求导、单调区间与极值 3.图象关键特征（零点/渐近线/对称性）4.参数a变化对图象的影响 5.常见考题类型。公式用LaTeX行内$...$。`}],false,el);
+}
+drawFx();
+
 /* ---------- GeoGebra ---------- */
 let ggbReady=false;
 function loadGGB(){
@@ -113,46 +417,8 @@ async function aiGGB(){
     let n=0;const tm=setInterval(()=>{n++;if(ggbReady){clearInterval(tm);runGGB(cmds);qs('#ggbOut').innerHTML='✅ 已画进画板！生成的指令：<br>'+cmds.join('<br>');}else if(n>40){clearInterval(tm);}},500);
   }
 }
-<button class="act" onclick="loadGGB()">加载 / 切换</button>
-</div>
-<div class="chips">
-<button onclick="ggbDemo('tangent')">导数·动态切线</button>
-<button onclick="ggbDemo('para')">抛物线 abc 滑块</button>
-<button onclick="ggbDemo('trig')">单位圆⇆正弦曲线</button>
-<button onclick="ggbDemo('conic')">椭圆定义(拖P点)</button>
-</div>
-<div id="ggbDiv" style="background:#fff;border-radius:10px;min-height:480px"></div>
-<p class="hint">画板内可直接拖动滑块/点，左侧代数区可输入任意表达式，工具栏可作垂线、切线、轨迹等。首次加载约几秒。</p>
-</div>
-<div class="card"><h2>🤖 AI 生成互动图形（一句话→自动搭好滑块和图）</h2>
-<div class="row"><input type="text" id="ggbReq" placeholder="例：画 y=a·sin(bx+c)，a b c 都用滑块；或：演示三角形外心随顶点移动" style="flex:1">
-<button class="act" onclick="aiGGB()">生成</button>
-<button class="sub" onclick="listen('ggbReq')">🎤</button></div>
-<div class="out" id="ggbOut">AI 会把你的需求翻译成 GeoGebra 指令并直接画进上面的画板，然后你就可以亲手拖动探索。</div>
-</div>
-</section>
-<section id="mathlab" class="page">
-<div class="card"><h2>📈 函数图象实验室（输入任意 f(x)，拖动参数 a 看图象变化）</h2>
-<div class="row"><input type="text" id="fx" value="a*sin(x)+x/3" style="flex:1" oninput="drawFx()">
-<button class="sub" onclick="qs('#fx').value='a*x^2-2*x+1';drawFx()">二次</button>
-<button class="sub" onclick="qs('#fx').value='sin(a*x)';drawFx()">三角</button>
-<button class="sub" onclick="qs('#fx').value='a^x';drawFx()">指数</button>
-<button class="sub" onclick="qs('#fx').value='x^3-a*x';drawFx()">三次</button>
-<button class="sub" onclick="qs('#fx').value='log(x)/x*a';drawFx()">lnx/x</button></div>
-<div class="row"><label>参数 a = <span id="av">1.0</span></label>
-<input type="range" id="aSlider" min="-3" max="3" step="0.1" value="1" style="flex:1" oninput="qs('#av').textContent=(+this.value).toFixed(1);drawFx()">
-<label><input type="checkbox" id="showD" onchange="drawFx()"> 显示导函数 f′(x)（虚线）</label></div>
-<canvas id="cm" class="sim" width="900" height="420"></canvas>
-<p class="hint">支持：+ - * / ^ ( )、sin cos tan、log(即ln)、log10、sqrt、abs、exp、pi、e。例：a*x^2、sin(x)/x、e^(-x^2)。<br>勾选导函数后观察：f′(x)>0 的区间 f 递增；f′(x)=0 处是极值点 —— 直观理解导数！</p>
-<div class="row"><button class="act" onclick="explainFx()">🤖 让 AI 分析这个函数（单调性/极值/图象+')',14,20);
-  if(qs('#showD').checked){ctx.fillStyle='#ff9e6c';ctx.fillText("f'(x) 虚线",14,40);}
-}
-function explainFx(){
-  const el=qs('#fxOut');el.style.display='block';
-  callAI([{role:'user',content:`请作为数学老师分析函数 f(x)=${qs('#fx').value}（其中参数 a=${qs('#aSlider').value}）：1.定义域 2.求导并分析单调区间与极值 3.图象关键特征（零点/渐近线/对称性等）4.参数a变化时图象如何变化 5.这个函数常出现在哪类考题中。公式用LaTeX行内$...$。`}],false,el);
-}
 
-/* ================= 2D 物理动画 ================= */
+/* ---------- 2D 物理动画 ---------- */
 const c1=qs('#c1'),x1=c1.getContext('2d');let projs=[];
 function fire(){const v=+qs('#v0').value,a=+qs('#ang').value*Math.PI/180;projs.push({x:30,y:300,vx:v*Math.cos(a)*4,vy:-v*Math.sin(a)*4,trail:[]});}
 function arrow(ctx,x0,y0,x2,y2){ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x2,y2);ctx.stroke();}
@@ -188,7 +454,7 @@ const PX=450,PY=30;
 c3.addEventListener('pointerdown',e=>{dragP=true;om=0;movePend(e);});
 c3.addEventListener('pointermove',e=>dragP&&movePend(e));
 window.addEventListener('pointerup',()=>dragP=false);
-function movePend(e){const r=c3.getBoundingClientRect();const mx=(e.clientX-r.left)*900/r.width,my=(e.clientY-r.top)*320/r.height;th=Math.atan2(mx-PX,my-PY);}
+function movePend(e){const r=c3.getBoundingClientRect();const mx2=(e.clientX-r.left)*900/r.width,my=(e.clientY-r.top)*320/r.height;th=Math.atan2(mx2-PX,my-PY);}
 function drawPend(){
   const L=+qs('#Lp').value,Lpx=L*80;
   if(!dragP){const a=-9.8/L*Math.sin(th);om+=a*0.016;om*=0.999;th+=om*0.016;}
@@ -203,7 +469,7 @@ function drawPend(){
 }
 drawPend();
 
-/* ================= 3D 实验室 ================= */
+/* ---------- 3D 实验室 ---------- */
 const three={inited:false};
 function dragRotate(cv,cb){let d=false,lx=0,ly=0;
   cv.addEventListener('pointerdown',e=>{d=true;lx=e.clientX;ly=e.clientY;});
@@ -211,12 +477,11 @@ function dragRotate(cv,cb){let d=false,lx=0,ly=0;
   window.addEventListener('pointerup',()=>d=false);}
 function init3D(){
   if(three.inited)return;
-  if(!window.THREE){qs('#orbInfo').textContent='⚠️ 3D 库加载中，请稍后再点一次此标签页';return;}
+  if(!window.THREE){qs('#orbInfo').textContent='⚠️ 3D 库加载中，请稍后再点一次此页';return;}
   three.inited=true;setupOrbit();setupHelix();loop3d();
 }
 function setupOrbit(){
-  const cv=qs('#t1');
-  const R=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+  const cv=qs('#t1'),R=new THREE.WebGLRenderer({canvas:cv,antialias:true});
   const sc=new THREE.Scene();sc.background=new THREE.Color(0x06091a);
   const cam=new THREE.PerspectiveCamera(55,2,0.1,2000);
   let thA=0.6,phA=1.15,dist=36;
@@ -229,10 +494,8 @@ function setupOrbit(){
   for(let i=0;i<400;i++)sp.push((Math.random()-.5)*400,(Math.random()-.5)*400,(Math.random()-.5)*400);
   sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));
   sc.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:0.7})));
-  const earth=new THREE.Mesh(new THREE.SphereGeometry(3,32,32),new THREE.MeshPhongMaterial({color:0x3a7bd5,emissive:0x112244}));
-  sc.add(earth);
-  const sat=new THREE.Mesh(new THREE.SphereGeometry(0.5,16,16),new THREE.MeshPhongMaterial({color:0xffcf5e,emissive:0x554411}));
-  sc.add(sat);
+  const earth=new THREE.Mesh(new THREE.SphereGeometry(3,32,32),new THREE.MeshPhongMaterial({color:0x3a7bd5,emissive:0x112244}));sc.add(earth);
+  const sat=new THREE.Mesh(new THREE.SphereGeometry(0.5,16,16),new THREE.MeshPhongMaterial({color:0xffcf5e,emissive:0x554411}));sc.add(sat);
   const GM=600;let pos,vel,trail=[],trailLine=null,crashed=false;
   window.resetOrbit=function(){pos=new THREE.Vector3(10,0,0);vel=new THREE.Vector3(0,0,Math.sqrt(GM/10)*(+qs('#orbV').value));trail=[];crashed=false;};
   resetOrbit();
@@ -251,8 +514,7 @@ function setupOrbit(){
     R.render(sc,cam);};
 }
 function setupHelix(){
-  const cv=qs('#t2');
-  const R=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+  const cv=qs('#t2'),R=new THREE.WebGLRenderer({canvas:cv,antialias:true});
   const sc=new THREE.Scene();sc.background=new THREE.Color(0x090618);
   const cam=new THREE.PerspectiveCamera(55,2,0.1,1000);
   let thA=0.8,phA=1.2,dist=26;
@@ -262,8 +524,7 @@ function setupHelix(){
   sc.add(new THREE.AmbientLight(0xffffff,0.8));
   for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++)
     sc.add(new THREE.ArrowHelper(new THREE.Vector3(0,1,0),new THREE.Vector3(i*6,-8,j*6),16,0x4dde8a,1.6,0.9));
-  const ball=new THREE.Mesh(new THREE.SphereGeometry(0.45,16,16),new THREE.MeshPhongMaterial({color:0xff6b9d,emissive:0x551133}));
-  sc.add(ball);
+  const ball=new THREE.Mesh(new THREE.SphereGeometry(0.45,16,16),new THREE.MeshPhongMaterial({color:0xff6b9d,emissive:0x551133}));sc.add(ball);
   let pos=new THREE.Vector3(3,-8,0),v=new THREE.Vector3(3,1.5,0),trail=[],trailLine=null;
   three.helix=function(){
     const B=+qs('#Bs').value,dt=0.02;
@@ -285,6 +546,8 @@ function loop3d(){
   if(qs('#lab3d').classList.contains('show')){three.orbit&&three.orbit();three.helix&&three.helix();}
   requestAnimationFrame(loop3d);
 }
+
+loadCfgUI();
 </script>
 </body>
 </html>
