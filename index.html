@@ -78,6 +78,41 @@ img.preview { max-width:100%; border-radius:10px; margin-top:8px; }
 <option value="3d">3D 绘图</option>
 <option value="classic">经典全功能</option>
 </select>
+/* ---------- GeoGebra ---------- */
+let ggbReady=false;
+function loadGGB(){
+  ggbReady=false;
+  if(!window.GGBApplet){qs('#ggbOut').textContent='⚠️ GeoGebra 库加载中，稍等几秒再点一次';return;}
+  qs('#ggbDiv').innerHTML='';
+  const w=Math.min(910,qs('#ggbDiv').clientWidth||910);
+  const app=new GGBApplet({appName:qs('#ggbApp').value,id:'ggbApplet',width:w,height:480,
+    language:'zh-CN',showToolBar:true,showAlgebraInput:true,showMenuBar:false,
+    appletOnLoad:function(){ggbReady=true;}},true);
+  app.inject('ggbDiv');
+}
+function runGGB(cmds){
+  if(!ggbReady||!window.ggbApplet){alert('画板还没就绪，请先点「加载/切换」，几秒后再试');return;}
+  try{ggbApplet.newConstruction();}catch(e){}
+  cmds.forEach(c=>{c=c.trim();if(c)try{ggbApplet.evalCommand(c);}catch(e){}});
+}
+const GGB_DEMOS={
+ tangent:['a=Slider(-4,4,0.05)','f(x)=x^3/3-x','A=(a,f(a))','t=Tangent(A,f)','SetColor(t,255,120,60)','SetColor(A,255,200,0)','Text("拖动滑块a，观察切线斜率=f′(a)",(-4,4))'],
+ para:['a=Slider(-3,3,0.1)','b=Slider(-5,5,0.1)','c=Slider(-5,5,0.1)','f(x)=a x^2+b x+c','V=Extremum(f)','SetColor(V,255,80,80)','Text("顶点随abc变化，a控制开口，c上下平移",(-5,5))'],
+ trig:['α=Slider(0°,360°,1°)','O=(0,0)','cir=Circle(O,1)','P=(cos(α),sin(α))','s=Segment(O,P)','h=Segment(P,(cos(α),0))','SetColor(h,80,200,120)','g(x)=sin(x)','Q=(α,sin(α))','SetColor(Q,255,200,0)','Text("拖α：单位圆上P的纵坐标 = 正弦曲线上Q的高度",(1,1.3))'],
+ conic:['F1=(-2,0)','F2=(2,0)','a=Slider(2.1,5,0.05)','el=Ellipse(F1,F2,a)','P=Point(el)','s1=Segment(P,F1)','s2=Segment(P,F2)','SetColor(s1,255,120,60)','SetColor(s2,80,160,255)','Text("拖动P点：PF₁+PF₂ 始终等于 2a（定值）",(-4.5,4))']};
+function ggbDemo(k){
+  if(!ggbReady){loadGGB();let n=0;const tm=setInterval(()=>{n++;if(ggbReady){clearInterval(tm);runGGB(GGB_DEMOS[k]);}else if(n>40)clearInterval(tm);},500);}
+  else runGGB(GGB_DEMOS[k]);
+}
+async function aiGGB(){
+  const req=qs('#ggbReq').value.trim();if(!req)return;
+  if(!ggbReady)loadGGB();
+  const t=await callAI([{role:'user',content:`把这个数学学习需求翻译成 GeoGebra Classic 脚本指令。严格要求：1.只输出指令本身，每行一条，禁止任何解释文字、禁止markdown代码块标记 2.可调参数一律用 Slider(min,max,step) 创建 3.使用英文命令名（Slider/Tangent/Segment/Circle/Ellipse/Extremum/Intersect/Polygon/Point/SetColor/Text等）4.最后用 Text() 加一句中文操作提示放在合适坐标。需求：${req}`}],false,qs('#ggbOut'));
+  if(t){
+    const cmds=t.replace(/```[a-z]*\n?/gi,'').split('\n').map(l=>l.trim()).filter(l=>l&&!/^[#/\u4e00-\u9fa5]/.test(l));
+    let n=0;const tm=setInterval(()=>{n++;if(ggbReady){clearInterval(tm);runGGB(cmds);qs('#ggbOut').innerHTML='✅ 已画进画板！生成的指令：<br>'+cmds.join('<br>');}else if(n>40){clearInterval(tm);}},500);
+  }
+}
 <button class="act" onclick="loadGGB()">加载 / 切换</button>
 </div>
 <div class="chips">
