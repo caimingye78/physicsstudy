@@ -69,6 +69,33 @@ img.preview { max-width:100%; border-radius:10px; margin-top:8px; }
 </section>
 
 <!-- ===== 数学函数实验室 ===== -->
+<section id="ggb" class="page">
+<div class="card"><h2>🧮 GeoGebra 互动数学画板（官方完整版内嵌）</h2>
+<div class="row">
+<select id="ggbApp">
+<option value="graphing">函数绘图</option>
+<option value="geometry">几何</option>
+<option value="3d">3D 绘图</option>
+<option value="classic">经典全功能</option>
+</select>
+<button class="act" onclick="loadGGB()">加载 / 切换</button>
+</div>
+<div class="chips">
+<button onclick="ggbDemo('tangent')">导数·动态切线</button>
+<button onclick="ggbDemo('para')">抛物线 abc 滑块</button>
+<button onclick="ggbDemo('trig')">单位圆⇆正弦曲线</button>
+<button onclick="ggbDemo('conic')">椭圆定义(拖P点)</button>
+</div>
+<div id="ggbDiv" style="background:#fff;border-radius:10px;min-height:480px"></div>
+<p class="hint">画板内可直接拖动滑块/点，左侧代数区可输入任意表达式，工具栏可作垂线、切线、轨迹等。首次加载约几秒。</p>
+</div>
+<div class="card"><h2>🤖 AI 生成互动图形（一句话→自动搭好滑块和图）</h2>
+<div class="row"><input type="text" id="ggbReq" placeholder="例：画 y=a·sin(bx+c)，a b c 都用滑块；或：演示三角形外心随顶点移动" style="flex:1">
+<button class="act" onclick="aiGGB()">生成</button>
+<button class="sub" onclick="listen('ggbReq')">🎤</button></div>
+<div class="out" id="ggbOut">AI 会把你的需求翻译成 GeoGebra 指令并直接画进上面的画板，然后你就可以亲手拖动探索。</div>
+</div>
+</section>
 <section id="mathlab" class="page">
 <div class="card"><h2>📈 函数图象实验室（输入任意 f(x)，拖动参数 a 看图象变化）</h2>
 <div class="row"><input type="text" id="fx" value="a*sin(x)+x/3" style="flex:1" oninput="drawFx()">
